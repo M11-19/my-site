@@ -26,7 +26,7 @@
         .vehicle-list {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-around;
+            justify-content: space-between;
             margin-top: 20px;
         }
         .vehicle {
@@ -35,8 +35,8 @@
             border-radius: 5px;
             margin: 10px;
             padding: 15px;
-            width: 300px;
-            text-align: center;
+            width: calc(25% - 20px); /* 4 vehicles per row */
+            box-sizing: border-box; /* Include padding and border in width */
         }
         .vehicle img {
             width: 100%;
@@ -118,6 +118,31 @@
             <h2>2023 Lexus IS250</h2>
             <p>Price: $35,000</p>
             <button onclick="addToCart('2023 Lexus IS250', 35000, 'https://th.bing.com/th/id/OIP.cnu38FxskIpyvhD1em2qywHaEK?w=291&h=181&c=7&r=0&o=5&pid=1.7')">Purchase</button>
+        </div>
+        <!-- New Vehicle Options -->
+        <div class="vehicle">
+            <img src="https://www.avantgardewheels.com/wp-content/uploads/2021/07/jeep-srt-trackhawk-m520r-gloss-black-avant-garde-wheels-01-768x512.jpg" alt="2019 Track Hawk">
+            <h2>2019 Track Hawk</h2>
+            <p>Price: $90,000</p>
+            <button onclick="addToCart('2019 Track Hawk', 90000, 'https://www.avantgardewheels.com/wp-content/uploads/2021/07/jeep-srt-trackhawk-m520r-gloss-black-avant-garde-wheels-01-768x512.jpg')">Purchase</button>
+        </div>
+        <div class="vehicle">
+            <img src="https://www.perfectautocollection.com/imagetag/913/53/l/Used-2020-Dodge-Charger-Scat-Pack-Widebody-1614225350.jpg" alt="Widebody Scatpack Charger">
+            <h2>Widebody Scatpack Charger</h2>
+            <p>Price: $60,000</p>
+            <button onclick="addToCart('Widebody Scatpack Charger', 60000, 'https://www.perfectautocollection.com/imagetag/913/53/l/Used-2020-Dodge-Charger-Scat-Pack-Widebody-1614225350.jpg')">Purchase</button>
+        </div>
+        <div class="vehicle">
+            <img src="https://th.bing.com/th/id/OIP.OBbwwxOh9IHSp_XrOlYcwgHaFj?w=234&h=180&c=7&r=0&o=5&pid=1.7" alt="Peterbilt 379">
+            <h2>Peterbilt 379</h2>
+            <p>Price: $120,000</p>
+            <button onclick="addToCart('Peterbilt 379', 120000, 'https://th.bing.com/th/id/OIP.OBbwwxOh9IHSp_XrOlYcwgHaFj?w=234&h=180&c=7&r=0&o=5&pid=1.7')">Purchase</button>
+        </div>
+        <div class="vehicle">
+            <img src="https://images.squarespace-cdn.com/content/v1/58928af6bf629adabaeae969/1493048388420-I55GP3JV5FMWN8MA6HY4/Bikes+42217+024.JPG" alt="Harley Davidson Street Glide">
+            <h2>Harley Davidson Street Glide</h2>
+            <p>Price: $25,000</p>
+            <button onclick="addToCart('Harley Davidson Street Glide', 25000, 'https://images.squarespace-cdn.com/content/v1/58928af6bf629adabaeae969/1493048388420-I55GP3JV5FMWN8MA6HY4/Bikes+42217+024.JPG')">Purchase</button>
         </div>
     </div>
 
