@@ -7,10 +7,10 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-image: url('https://th.bing.com/th?id=OIP.G7Wyo0QWO4oOemm79b9B9AAAAA&w=250&h=250&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2'); /* Louis Vuitton logo */
-            background-repeat: repeat; /* Repeat the logo across the background */
-            background-size: 100px 100px; /* Size of the logo */
-            background-color: #E6E6FA; /* Light purple background */
+            background-image: url('https://th.bing.com/th?id=OIP.G7Wyo0QWO4oOemm79b9B9AAAAA&w=250&h=250&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2'); 
+            background-repeat: repeat; 
+            background-size: 100px 100px; 
+            background-color: #E6E6FA; 
             margin: 0;
             padding: 20px;
         }
@@ -54,7 +54,6 @@
         button:hover {
             background: #218838;
         }
-        /* Modal styles */
         .modal {
             display: none;
             position: fixed;
@@ -93,6 +92,7 @@
         <h1>The V Store</h1>
         <p>Cashout or Crashout!</p>
         <button id="cartButton">View Cart</button>
+        <button id="checkoutButton" style="margin-left: 10px;">Checkout</button>
     </header>
     <div class="vehicle-list">
         <div class="vehicle">
@@ -121,13 +121,24 @@
         </div>
     </div>
 
-    <!-- The Modal -->
+    <!-- The Modal for Cart -->
     <div id="myModal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="close" onclick="closeCartModal()">&times;</span>
             <h2>Your Cart</h2>
             <div id="cartItems"></div>
             <h3>Total: $<span id="totalPrice">0</span></h3>
+        </div>
+    </div>
+
+    <!-- The Modal for Checkout -->
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCheckoutModal()">&times;</span>
+            <h2>Checkout</h2>
+            <div id="checkoutItems"></div>
+            <h3>Total: $<span id="checkoutTotal">0</span></h3>
+            <button onclick="confirmCheckout()">Confirm Checkout</button>
         </div>
     </div>
 
@@ -162,6 +173,10 @@
             document.getElementById('myModal').style.display = "block";
         }
 
+        function closeCartModal() {
+            document.getElementById('myModal').style.display = "none";
+        }
+
         function removeFromCart(index) {
             total -= cart[index].price;
             cart.splice(index, 1);
@@ -169,16 +184,42 @@
             document.getElementById('cartButton').click(); // Refresh cart view
         }
 
-        // Close the modal when the user clicks on <span> (x)
-        document.querySelector('.close').onclick = function() {
-            document.getElementById('myModal').style.display = "none";
+        document.getElementById('checkoutButton').onclick = function() {
+            const checkoutItems = document.getElementById('checkoutItems');
+            checkoutItems.innerHTML = ''; // Clear previous items
+
+            if (cart.length === 0) {
+                checkoutItems.innerHTML = '<p>Your cart is empty.</p>';
+                document.getElementById('checkoutTotal').innerText = 0;
+            } else {
+                cart.forEach(item => {
+                    checkoutItems.innerHTML += `<p>${item.name}: $${item.price}</p>`;
+                });
+                document.getElementById('checkoutTotal').innerText = total;
+            }
+
+            document.getElementById('checkoutModal').style.display = "block";
         }
 
-        // Close the modal when the user clicks anywhere outside of the modal
+        function closeCheckoutModal() {
+            document.getElementById('checkoutModal').style.display = "none";
+        }
+
+        function confirmCheckout() {
+            alert(`Thank you for your purchase! Total: $${total}`);
+            cart = []; // Clear cart
+            total = 0;
+            closeCheckoutModal();
+        }
+
+        // Close the modals when the user clicks outside of them
         window.onclick = function(event) {
-            const modal = document.getElementById('myModal');
-            if (event.target == modal) {
-                modal.style.display = "none";
+            const cartModal = document.getElementById('myModal');
+            const checkoutModal = document.getElementById('checkoutModal');
+            if (event.target == cartModal) {
+                cartModal.style.display = "none";
+            } else if (event.target == checkoutModal) {
+                checkoutModal.style.display = "none";
             }
         }
     </script>
